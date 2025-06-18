@@ -72,7 +72,7 @@ function CabinRow({ cabin }) {
 
 CabinRow.propTypes = {
   cabin: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     maxCapacity: PropTypes.number,
     regularPrice: PropTypes.number,

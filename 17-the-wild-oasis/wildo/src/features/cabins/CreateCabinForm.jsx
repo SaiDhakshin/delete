@@ -28,8 +28,8 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     const image = typeof data.image === 'string' ? data.image : data?.image?.[0]
     // console.log(data)
     if(isEditSession) editCabin({ newCabin: {...data, image}, id: editId}, {
-      onSuccess: () => {
-        reset();
+      onSuccess: (data) => {
+        reset(data);
       }
     });
     else createCabin({...data, image: image}, {

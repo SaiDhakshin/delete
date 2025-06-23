@@ -10,7 +10,7 @@ import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onClose }) {
 
   const {  id: editId, ...editValues } = cabinToEdit
   const isEditSession = Boolean(editId);
@@ -30,12 +30,14 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     if(isEditSession) editCabin({ newCabin: {...data, image}, id: editId}, {
       onSuccess: (data) => {
         reset(data);
+        onClose?.()
       }
     });
     else createCabin({...data, image: image}, {
       onSuccess: (data) => {
         console.log(data);
         reset();
+        onClose?.()
       },
     })
   }
@@ -45,7 +47,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onErrors)}>
+    <Form onSubmit={handleSubmit(onSubmit, onErrors)} type={onClose ? 'modal' : 'regular'}>
       <FormRow label="Name" error={errors?.name?.message}>
         <Input type="text" id="name" {...register('name',{
           required: 'This field is required'
@@ -98,7 +100,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button type="reset">
+        <Button type="reset" onClick={() => onClose?.()}>
           Cancel
         </Button>
         <Button disabled={isWorking}>{ isEditSession ? 'Edit cabin' : 'Add cabin' }</Button>

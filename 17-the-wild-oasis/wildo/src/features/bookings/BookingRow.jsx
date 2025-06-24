@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
 
 import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
 
-import { formatCurrency } from "../../utils/helpers";
-import { formatDistanceFromNow } from "../../utils/helpers";
+// import { formatCurrency } from "../../utils/helpers";
+// import { formatDistanceFromNow } from "../../utils/helpers";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -40,11 +41,11 @@ function BookingRow({
     created_at,
     startDate,
     endDate,
-    numNights,
-    numGuests,
+    numberOfNights,
+    numberOfGuests,
     totalPrice,
     status,
-    guests: { fullName: guestName, email },
+    guests: { fullName: guestName, emailAddress },
     cabins: { name: cabinName },
   },
 }) {
@@ -60,15 +61,15 @@ function BookingRow({
 
       <Stacked>
         <span>{guestName}</span>
-        <span>{email}</span>
+        <span>{emailAddress}</span>
       </Stacked>
 
       <Stacked>
         <span>
           {isToday(new Date(startDate))
             ? "Today"
-            : formatDistanceFromNow(startDate)}{" "}
-          &rarr; {numNights} night stay
+            : startDate}{" "}
+          &rarr; {numberOfNights} night stay
         </span>
         <span>
           {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
@@ -78,7 +79,7 @@ function BookingRow({
 
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
-      <Amount>{formatCurrency(totalPrice)}</Amount>
+      <Amount>{totalPrice}</Amount>
     </Table.Row>
   );
 }

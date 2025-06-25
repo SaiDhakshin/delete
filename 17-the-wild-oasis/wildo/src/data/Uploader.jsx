@@ -55,11 +55,11 @@ async function createBookings() {
 
   const finalBookings = bookings.map((booking) => {
     // Here relying on the order of cabins, as they don't have and ID yet
-    const cabin = cabins.at(booking.cabinId - 1);
+    const cabin = cabins.at(booking.cabinID - 1);
     const numNights = booking.endDate - booking.startDate;
     const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
     const extrasPrice = booking.hasBreakfast
-      ? numNights * 15 * booking.numGuests
+      ? numNights * 15 * booking.numberOfGuests
       : 0; // hardcoded breakfast price
     const totalPrice = cabinPrice + extrasPrice;
 
@@ -88,8 +88,8 @@ async function createBookings() {
       cabinPrice,
       extrasPrice,
       totalPrice,
-      guestID: allGuestIds.at(booking.guestId - 1),
-      cabinID: allCabinIds.at(booking.cabinId - 1),
+      guestID: allGuestIds.at(booking.guestID - 1),
+      cabinID: allCabinIds.at(booking.cabinID - 1),
       status,
     };
   });

@@ -81,7 +81,7 @@ function CheckinBooking() {
       <Box>
         <CheckBox checked={confirmPaid} onChange={() => setConfirmPaid(confirm => !confirm)}
           disabled={confirmPaid || isCheckingIn}>
-          I confirm that {guests.fullName} has paid the total amount of {!addBreakfast ? totalPrice.toString() : (totalPrice + optionalBreakfastPrice).toString()}
+          I confirm that {guests.fullName} has paid the total amount of {!addBreakfast ? totalPrice?.toString() : (totalPrice + optionalBreakfastPrice)?.toString()}
         </CheckBox>
       </Box>
 

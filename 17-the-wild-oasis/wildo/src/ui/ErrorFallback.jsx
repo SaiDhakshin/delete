@@ -1,4 +1,7 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
+import Heading from "./Heading";
+import Button from "./Button";
 
 const StyledErrorFallback = styled.main`
   height: 100vh;
@@ -29,3 +32,19 @@ const Box = styled.div`
     color: var(--color-grey-500);
   }
 `;
+
+function ErrorFallback({error, resetErrorBoundary}) {
+  return (
+    <>
+      <StyledErrorFallback>
+        <Box>
+          <Heading as='h2'>Something went wrong {error}</Heading>
+          <Button onClick={resetErrorBoundary}/>
+        </Box>
+      </StyledErrorFallback>
+    </>
+  )
+}
+
+export default ErrorFallback;
+
